@@ -58,7 +58,7 @@ network = CapsuleNetwork(image_width=28,
                          num_primary_units=num_primary_units,
                          primary_unit_size=primary_unit_size,
                          num_output_units=10, # one for each MNIST digit
-                         output_unit_size=output_unit_size).cuda()
+                         output_unit_size=output_unit_size)
 print(network)
 
 
@@ -80,7 +80,7 @@ def test():
         target_indices = target
         target_one_hot = to_one_hot(target_indices, length=network.digits.num_units)
 
-        data, target = Variable(data, volatile=True).cuda(), Variable(target_one_hot).cuda()
+        data, target = Variable(data, volatile=True), Variable(target_one_hot)
 
         output = network(data)
 
@@ -111,7 +111,7 @@ def train(epoch):
     for batch_idx, (data, target) in enumerate(train_loader):
         target_one_hot = to_one_hot(target, length=network.digits.num_units)
 
-        data, target = Variable(data).cuda(), Variable(target_one_hot).cuda()
+        data, target = Variable(data), Variable(target_one_hot)
 
         optimizer.zero_grad()
 
